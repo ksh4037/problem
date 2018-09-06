@@ -71,7 +71,7 @@
     </div>
 
     <div class="col-sm-9">
-      <h4 class="s_title">문제관리</h4>
+      <h4 class="s_title">문제관111리</h4>
       <hr>
       <h2>문제리스트</h2>
   	</div>
