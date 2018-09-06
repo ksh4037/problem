@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.daou.intern.user.exam.ExamMapper">
+	<resultMap type="com.daou.intern.user.exam.ExamVO" id="examVO">
+		<result column="a" property="a" />
+		<result column="b" property="b" />
+	</resultMap>
+
+	<select id="test" resultType="com.daou.intern.user.exam.ExamVO">
+		select * from test where a=1
+	</select>
+</mapper>	 

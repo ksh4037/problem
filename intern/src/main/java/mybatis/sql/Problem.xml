@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.daou.intern.admin.problem.ProblemMapper">
+
+	<resultMap type="com.daou.intern.admin.problem.ProblemVO" id="problemVO">
+		<result column="problem_seq" property="problem_seq"/>
+		<result column="problem" property="problem"/>
+		<result column="type" property="type"/>
+		<result column="reg_id" property="reg_id"/>
+		<result column="reg_date" property="reg_date"/>
+		<result column="upt_id" property="upt_id"/>
+		<result column="upt_date" property="upt_date"/>
+		<result column="delete_yn" property="delete_yn"/>
+		<result column="category_seq" property="category_seq"/>
+		<result column="category_name" property="category_name"/>
+		<result column="scType" property="scType"/>
+		<result column="srch_input" property="srch_input"/>
+	</resultMap>
+	
+	<resultMap type="com.daou.intern.admin.problem.OptionVO" id="optionVO">
+		<result column="option_seq" property="option_seq"/>
+		<result column="problem_seq" property="problem_seq"/>
+		<result column="option_contents" property="option_contents"/>
+		<result column="answer_yn" property="answer_yn"/>
+		<result column="reg_id" property="reg_id"/>
+		<result column="reg_date" property="reg_date"/>
+		<result column="upt_id" property="upt_id"/>
+		<result column="upt_date" property="upt_date"/>
+	</resultMap>
+
+
+	<select id="problemList" resultType="com.daou.intern.admin.problem.ProblemVO">
+		select * 
+		from problem_info
+		where delete_yn = 'N'
+		<if test="scType != null and scType != ''">
+			<if test="scType.equals('problem')">
+				and problem LIKE CONCAT('%',#{srch_input},'%')
+			</if>
+		</if>
+	</select>
+	
+	<select id="problemDetail" resultType="com.daou.intern.admin.problem.ProblemVO">
+		select * 
+		from problem_info
+		where problem_seq = #{problem_seq}
+		and delete_yn = 'N'
+	</select>
+	
+	<select id="optionDetail" resultType="HashMap">
+		select p.problem_seq, p.problem, p.type, p.category_seq, p.reg_id, p.reg_date,
+		       o.option_seq, o.option_contents , o.answer_yn
+	 	from problem_info p left join option_info o
+		on p.problem_seq = o.problem_seq
+		where p.problem_seq = #{problem_seq}
+		and  p.delete_yn = 'N'
+	</select>
+	
+	<select id="selectProblemSeq" resultType="Integer">
+		select max(problem_seq) from problem_info
+	</select>
+
+	<insert id="problemReg" parameterType="com.daou.intern.admin.problem.ProblemVO">
+		insert into problem_info(problem, type, category_seq, reg_id, reg_date, upt_id, upt_date, delete_yn)
+		values(
+			#{problem},
+			#{type}, 
+			null, 
+			'admin',  
+			now(), 
+			null, 
+			null, 
+			'N'
+		)
+	</insert>
+	
+	<insert id="optionReg" parameterType="com.daou.intern.admin.problem.OptionVO">
+		insert into option_info(problem_seq, option_contents, answer_yn, reg_id, reg_date, upt_id, upt_date)
+		values
+		(
+			#{problem_seq},
+			#{option_contents}, 
+			#{answer_yn}, 
+			'admin', 
+			now(), 
+			null, 
+			null
+		)
+	</insert>
+	
+	
+	<update id="problemUpdt" parameterType="com.daou.intern.admin.problem.ProblemVO">
+		update	problem_info
+		set problem = #{problem}
+		where problem_seq = #{problem_seq}
+	</update>
+
+
+	<delete id="deleteProblem" parameterType="Integer">
+		update problem_info
+		set delete_yn = 'Y'
+		where problem_seq = #{problem_seq}
+	</delete>
+	
+	<delete id="deleteOption" parameterType="Integer">
+		delete from option_info
+		where problem_seq = #{problem_seq}
+	</delete>
+	
+	
+	<select id="categoryList" resultType="com.daou.intern.admin.problem.ProblemVO">
+		select * 
+		from category_info
+		where delete_yn = 'N'
+	</select>
+	
+	<select id="categoryDetail" resultType="com.daou.intern.admin.problem.ProblemVO">
+		select * 
+		from category_info
+		where category_seq = #{category_seq}
+		and delete_yn = 'N'
+	</select>
+	
+	<insert id="categoryReg" parameterType="com.daou.intern.admin.problem.ProblemVO">
+		insert into category_info(category_name, reg_id, reg_date, upt_id, upt_date, delete_yn)
+		values
+		(
+			#{category_name}, 
+			'admin', 
+			now(), 
+			null, 
+			null,
+			'N'
+		)
+	</insert>
+	
+	<update id="categoryUpdt" parameterType="com.daou.intern.admin.problem.ProblemVO">
+		update	category_info
+		set category_name = #{category_name}
+		where category_seq = #{category_seq}
+	</update>
+
+	<delete id="deleteCategory" parameterType="Integer">
+		update category_info
+		set delete_yn = 'Y'
+		where category_seq = #{category_seq}
+	</delete>
+</mapper>	 
