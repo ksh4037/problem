@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<typeAlias alias="empVO" type="com.daou.intern.admin.employee.EmpVO"></typeAlias>
+		<typeAlias alias="boardVO" type="com.daou.intern.admin.board.BoardVO"></typeAlias>
+		<typeAlias alias="problemVO" type="com.daou.intern.admin.problem.ProblemVO"></typeAlias>
+		<typeAlias alias="optionVO" type="com.daou.intern.admin.problem.OptionVO"></typeAlias>
+		<typeAlias alias="examVO" type="com.daou.intern.user.exam.ExamVO"></typeAlias>
+		<typeAlias type="java.util.HashMap" alias="HashMap"/>
+	</typeAliases>
+</configuration>
