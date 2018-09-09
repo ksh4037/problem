@@ -67,8 +67,10 @@ public class ProblemController {
 	@RequestMapping(value = "admin/problemReg")
 	public ModelAndView problemReg(HttpServletRequest request, HttpServletResponse response, ProblemVO pvo, 
 							OptionVO ovo, @RequestParam(value="option_contents") String[] option_contents) {
+
 		
 		ModelAndView mav = new ModelAndView("admin/problem/result");
+
 		String msg="";
 		int p_result=0; //문제가 잘 저장되었는지 쿼리 리턴값을 받아오는 변수
 		int o_result=0; //보기가 잘 저장되었는지 쿼리 리턴값을 받아오는 변수
@@ -100,7 +102,7 @@ public class ProblemController {
 					
 				for(int i=0; i<option_contents.length; i++) {
 					
-					if(i == 0) {  // 첫 번째가 정답이니까
+					if(i == pvo.getAnswer_no()) {  // 첫 번째가 정답이니까
 						ovo.setAnswer_yn("Y");
 					}else {
 						ovo.setAnswer_yn("N");
@@ -208,7 +210,7 @@ public class ProblemController {
 				
 				for(int i=0; i<option_contents.length; i++) {
 					
-					if(i == 0) {  // 첫 번째가 정답이니까
+					if(i == pvo.getAnswer_no()) {  // 첫 번째가 정답이니까
 						ovo.setAnswer_yn("Y");
 					}else {
 						ovo.setAnswer_yn("N");

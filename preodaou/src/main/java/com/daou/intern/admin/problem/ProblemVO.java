@@ -12,7 +12,7 @@ public class ProblemVO {
 	private String upt_id;
 	private String upt_date;
 	private String delete_yn;
-	
+	private int answer_no; // 문제등록/수정 페이지에서 정답체크한 라디오 인덱스
 	
 	// 카테고리
 	private int category_seq;
@@ -121,6 +121,15 @@ public class ProblemVO {
 	public void setSrch_input(String srch_input) {
 		this.srch_input = srch_input;
 	}
+
+	public int getAnswer_no() {
+		return answer_no;
+	}
+
+	public void setAnswer_no(int answer_no) {
+		this.answer_no = answer_no;
+	}
+	
 	
 	
 

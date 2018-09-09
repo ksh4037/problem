@@ -7,18 +7,55 @@
 
 <!DOCTYPE html>
 <html>
-<head>
+<%@ include file="import.jsp"%> 
+<body>
 
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<div class="container">
+<h2><span style="color:#5bc0de">카테고리 관리</span></h2>
+<p><span class="span-font">풀어다우 서비스의 문제 카테고리 정보입니다.</span></p>     
 	
-	<link href="../resources/css/admin.css" rel="stylesheet" type="text/css">
-	
-	
+<form name="clistForm" id="clistForm" method="post" action="categoryDetail">
+	<input type="hidden" name="category_seq" id="category_seq"/>
+	<input type="hidden" name="caller" value="detail"/> 
+		<table class="table">
+			<thead>
+			   <tr>
+			    <th><input type="checkbox" id="allCheck" onclick="allChk(this);"/></th>
+			 	<th>No.</th>
+			 	<th>카테고리명</th>
+			 	<th>등록자</th>
+			 	<th>등록일</th>
+			  </tr>
+		    </thead>
+		    
+			<tbody>
+			<c:if test="${!empty categoryList}">
+				<c:forEach items="${categoryList}" var="categoryList" varStatus="status">
+				    <tr>
+				    	 <td><input type="checkbox" name="del_check" id="del_check" value="${categoryList.category_seq}"></td>
+					     <td>${status.index+1}</td>
+					     <td><a href="#" onclick="goDetail('${categoryList.category_seq}');">${categoryList.category_name}</a></td>
+					     <td>${categoryList.reg_id}</td>
+					     <td>${fn:substring(categoryList.reg_date,0,10)}</td>
+				    </tr>
+			   </c:forEach>
+		    </c:if>
+		    
+		    <c:if test="${empty categoryList}">
+				<tr>
+					<td colspan="5"><center>등록된 카테고리 정보가 없습니다.</center></td>
+				</tr>
+			</c:if>
+		</tbody>
+	</table>
+</form>
+			
+<input type="button" value="삭제" onclick="goDel();" class="btn btn-default" style="float:right"/>
+<input type="button" value="카테고리 등록" onclick="goCtgRegForm();"  class="btn btn-default" style="float:right;margin-right:5px"/>
+</div>
+
+
+
 	<script type="text/javascript">
 	
 		function goDetail(category_seq){
@@ -112,52 +149,5 @@
 		
 	</script>
 	
-</head>
-<body>
-
-
-<div class="container">
-<h2><span style="color:#5bc0de">카테고리 관리</span></h2>
-<p><span class="span-font">풀어다우 서비스의 문제 카테고리 정보입니다.</span></p>     
-	
-<form name="clistForm" id="clistForm" method="post" action="categoryDetail">
-	<input type="hidden" name="category_seq" id="category_seq"/>
-	<input type="hidden" name="caller" value="detail"/> 
-		<table class="table">
-			<thead>
-			   <tr>
-			    <th><input type="checkbox" id="allCheck" onclick="allChk(this);"/></th>
-			 	<th>No.</th>
-			 	<th>카테고리명</th>
-			 	<th>등록자</th>
-			 	<th>등록일</th>
-			  </tr>
-		    </thead>
-		    
-			<tbody>
-			<c:if test="${!empty categoryList}">
-				<c:forEach items="${categoryList}" var="categoryList" varStatus="status">
-				    <tr>
-				    	 <td><input type="checkbox" name="del_check" id="del_check" value="${categoryList.category_seq}"></td>
-					     <td>${status.index+1}</td>
-					     <td><a href="#" onclick="goDetail('${categoryList.category_seq}');">${categoryList.category_name}</a></td>
-					     <td>${categoryList.reg_id}</td>
-					     <td>${fn:substring(categoryList.reg_date,0,10)}</td>
-				    </tr>
-			   </c:forEach>
-		    </c:if>
-		    
-		    <c:if test="${empty categoryList}">
-				<tr>
-					<td colspan="5"><center>등록된 카테고리 정보가 없습니다.</center></td>
-				</tr>
-			</c:if>
-		</tbody>
-	</table>
-</form>
-			
-<input type="button" value="삭제" onclick="goDel();" class="btn btn-default" style="float:right"/>
-<input type="button" value="카테고리 등록" onclick="goCtgRegForm();"  class="btn btn-default" style="float:right;margin-right:5px"/>
-</div>
 </body>
 </html>

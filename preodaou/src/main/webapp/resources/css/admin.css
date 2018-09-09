@@ -4,12 +4,12 @@
     .row.content {height: 1500px}
     
     .sidenav {
-      background-color: #5bc0de ;
+      background-color: #5bc0de;
       height: 100%;
     }
-    
+
     .active_1 {
-      background-color: #ffffff  ;
+      background-color: #ffffff;
       border-radius:4px;
     }
     
@@ -18,8 +18,9 @@
     }
     
     .col-sm-4{
-    width:18%;
+    	width:18%;
     }
+    
     
     footer {
       background-color: #555;
@@ -44,3 +45,5 @@
     .span-font{
     	color:#999999;
     }
+    
+ 
