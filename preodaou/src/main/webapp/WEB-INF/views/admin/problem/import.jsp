@@ -12,5 +12,5 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script type="text/javascript" src="../resources/js/admin.js"></script>
-	<link href="../resources/css/admin.css" rel="stylesheet" type="text/css">
+	<link href="../resources/css/admin.css?after" rel="stylesheet" type="text/css">
 </head>
